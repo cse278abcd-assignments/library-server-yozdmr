@@ -16,10 +16,10 @@ My client-server application is a library management system. My four functionali
 	It is important to note that a client cannot modify a line once it has been entered. Therefore it is important to make sure your spelling is correct.
 	Once the client is finished writing the document, the document name and username of the current client will be sent to the server. The server will receive these and add the document to the database in "library.txt". The client-side program will then exit.
 
-**Viewing a document:** *NOT WORKING YET*  
-	When a client requests to view a document, they will be prompted with a list of documents in the database. They can then choose which document they want to view. Upon choosing, the contents of the document will be printed to them line by line. When they are done looking, they can exit the program.
+**Viewing a document:**
+	When a client requests to view a document, they will be prompted with a list of documents in the database. They can then choose which document they want to view. Upon choosing, the contents of the document will be printed to them. The program will then exit.
 
-**Deleting a document:** *NOT WORKING YET*  
+**Deleting a document:**
 	When a client requests the deletion of a document, they will be prompted with a list of documents in the database. They can then choose which document they want to delete. They can then delete the document permanently if they wish. If the server is for some reason unable to delete the document, the database will not be modified, and the user will be disconnected with a message.
 
 **Using the makefile**
