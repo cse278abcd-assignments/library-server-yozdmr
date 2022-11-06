@@ -29,14 +29,13 @@ vector<string> printFiles(int *docCount, int *totalSizeBytes, char *fileList) {
 
         *totalSizeBytes += sizebytes;  // Adds current file size to totalSizeBytes
 
-        
-        if (fileVec.size() == 0 || fileVec.at(fileVec.size() - 1) != docName) {
-            fileVec.push_back(docName);
+        // Adds file name to vector
+        fileVec.push_back(docName);
 
-            string fileInfo = std::__cxx11::to_string(*docCount) + ". " + docName + " \t"
-                    + std::__cxx11::to_string(sizebytes) + " bytes. \tAuthor: " + auName + "\n";
-            strcat(fileList, fileInfo.c_str());
-        }
+        // Adds properly formatted string of file information to cstring
+        string fileInfo = std::__cxx11::to_string(*docCount) + ". " + docName + " \t"
+                + std::__cxx11::to_string(sizebytes) + " bytes. \tAuthor: " + auName + "\n";
+        strcat(fileList, fileInfo.c_str());
         
     }
     readLibrary.close();
@@ -62,4 +61,34 @@ int receiveFile(int fileSize, char *userStringInput, char *username) {
         // Returns 1 if successful, returns -1 otherwise
         return 1;
     } else { return -1; }
+}
+
+// Removes a document based on its index in the fileVec vector
+void removeDoc(int userInput, vector<string> fileVec) {
+    // Copy every line from library.txt into a vector
+    vector<string> tempStoreFile;
+    ifstream readLibrary("library.txt");
+    string line;
+    while (getline(readLibrary, line)) {
+        tempStoreFile.push_back(line);
+    }
+    readLibrary.close();
+
+    // Write vector data into new file EXCEPT for pos that userData - 1 is
+    //   at, which is the line that the file to be deleted is in
+    ofstream temp("temp_lib.txt");
+    for (int i = 0; i < tempStoreFile.size(); i++) {
+        if (i != userInput - 1) {
+            temp << tempStoreFile.at(i) << endl;
+        }
+    }
+    temp.close();
+
+    // Remove library.txt and rename temp_lib.txt to library.txt
+    remove("library.txt");
+    rename("temp_lib.txt", "library.txt");
+
+    // Serverside message
+    cout << "Document '" << fileVec.at(userInput - 1)
+            << "' has been deleted." << endl;
 }

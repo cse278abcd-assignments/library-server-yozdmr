@@ -13,4 +13,7 @@ std::vector<std::string> printFiles(int *docCount, int *totalSizeBytes, char *fi
 // Writes a received doc to library.txt and returns the appropriate code
 int receiveFile(int fileSize, char *userStringInput, char *username);
 
+// Removes a document based on its index in the fileVec vector
+void removeDoc(int userInput, std::vector<std::string> fileVec);
+
 #endif // ASSIGNMENT3_YOZDMR_SERVERHEADER_H_

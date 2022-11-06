@@ -186,32 +186,7 @@ void HandleTCPClient(TCPSocket *sock) {
                     if (userInput != -99) {
                         // Only modifies library.txt if removing the file was successful
                         if (remove(fileVec.at(userInput - 1).c_str()) == 0) {
-                            // Copy every line from library.txt into a vector
-                            vector<string> tempStoreFile;
-                            ifstream readLibrary("library.txt");
-                            string line;
-                            while (getline(readLibrary, line)) {
-                                tempStoreFile.push_back(line);
-                            }
-                            readLibrary.close();
-
-                            // Write vector data into new file EXCEPT for pos that userData - 1 is
-                            //   at, which is the line that the file to be deleted is in
-                            ofstream temp("temp_lib.txt");
-                            for (int i = 0; i < tempStoreFile.size(); i++) {
-                                if (i != userInput - 1) {
-                                    temp << tempStoreFile.at(i) << endl;
-                                }
-                            }
-                            temp.close();
-
-                            // Remove library.txt and rename temp_lib.txt to library.txt
-                            remove("library.txt");
-                            rename("temp_lib.txt", "library.txt");
-
-                            // Serverside message
-                            cout << "Document '" << fileVec.at(userInput - 1)
-                                    << "' has been deleted." << endl;
+                            removeDoc(userInput, fileVec);
 
                             // Sends confirmation that document has been deleted to client
                             sock->send(&conf, sizeof(conf));
@@ -252,6 +227,7 @@ void HandleTCPClient(TCPSocket *sock) {
     delete sock;
 }
 
+// Checks if a value is in a vector
 bool checkInVector(vector<string> vec, string toFind) {
     for (string val : vec) {
         if (val == toFind) return true;
@@ -259,6 +235,7 @@ bool checkInVector(vector<string> vec, string toFind) {
     return false;
 }
 
+// Gets the size of a file
 int getFileSize(string fileName) {
     streampos begin,end;
     ifstream myfile (fileName, ios::binary);

@@ -77,7 +77,10 @@ int main(int argc, char *argv[]) {
                     string input;
                     while (input != ":q") {
                         getline(cin, input);
-                        if (input != ":q") strcat(docBody, input.c_str());
+                        if (input != ":q") {
+                            input += "\n";
+                            strcat(docBody, input.c_str());
+                        }
                     }
 
                     // Sends doc name and body to server
