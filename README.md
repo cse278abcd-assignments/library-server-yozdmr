@@ -23,7 +23,10 @@ My client-server application is a library management system. My four functionali
 	When a client requests the deletion of a document, they will be prompted with a list of documents in the database. They can then choose which document they want to delete. They can then delete the document permanently if they wish. If the server is for some reason unable to delete the document, the database will not be modified, and the user will be disconnected with a message.  
 
 **Using the makefile**  
-	COMING SOON  
-  
-  
+	Use "make server" to compile the server and "make client" to compile the client.  
+	Use "make c-run-server" to compile and run the server and "make c-run-client" to compile and run the client (default port is 9090).  
+	Use "make run-server" to run the server and "make run-client" to run the client.
+	Use "make make-files" to make the necessary files for the server to run properly. Make sure you do this this BEFORE RUNNING THE SERVER FOR THE FIRST TIME.
+	Use "make clean" to remove all object files and the Client and Server .exe files.
+
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=9090871&assignment_repo_type=AssignmentRepo)
